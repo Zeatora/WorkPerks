@@ -19,4 +19,12 @@ class PagesController extends BaseController
         ];
         return view('pages/login', $data);
     }
+
+    public function contact(): string
+    {
+        $data = [
+            'title' => 'Contact'
+        ];
+        return view('pages/contact', $data);
+    }
 }
