@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Controllers\Firebase;
 use App\Services\FirebaseService;
 use CodeIgniter\RESTful\ResourceController;
 

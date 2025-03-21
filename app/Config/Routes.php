@@ -11,6 +11,7 @@ $routes->setAutoRoute(true);
 
 // Pages Harus Terautentikasi Only
 $routes->get('/dashboard', 'DashboardController::index');
+$routes->get('/dashboardF', 'Firebase\TestingDataController::index');
 $routes->get('/pages/dashboard/delete/(:segment)', 'DashboardController::delete/$1');
 $routes->get('/pages/dashboard/modify/(:segment)', 'DashboardController::modify/$1');
 $routes->get('/pages/functions/dashboard_function/create', 'DashboardController::createPage');

@@ -4,7 +4,7 @@
 <div class="container mt-10">
     <div class="row">
         <div class="col pad-5">
-            <h1>Welcome to <?= $title ?></h1>
+        <h1>Welcome to <?= $title ?></h1>
             <section class="intro">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -29,9 +29,9 @@
                                                 <tr>
                                                     <th scope="row"><?= $i++ ?></th>
                                                     <td><?= $user['id'] ?></td>
-                                                    <td><?= $user['username'] ?></td>
-                                                    <td><?= $user['email'] ?></td>
-                                                    <td><?= $user['name'] ?></td>
+                                                    <td><?= $user['data']['username'] ?></td>
+                                                    <td><?= $user['data']['email'] ?></td>
+                                                    <td><?= $user['data']['name'] ?></td>
                                                     <td style="margin-right: 5px;"><a href="/pages/dashboard/modify/<?= $user['id'] ?>" class="btn btn-warning">EDIT</a><a href="/pages/dashboard/delete/<?= $user['id'] ?>" class="btn btn-danger">DELETE</a></td>
                                                 </tr>
                                                 <?php endforeach; ?>

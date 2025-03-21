@@ -42,6 +42,7 @@
                     <li class="nav-item active"><a href="/home" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="/dashboard" class="nav-link">Dashboard</a></li>
+                    <li class="nav-item"><a href="/dashboardF" class="nav-link">Firebase Testing</a></li>
                 </ul>
             </div>
         </div>
