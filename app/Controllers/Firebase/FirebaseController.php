@@ -33,18 +33,6 @@ class FirebaseController extends ResourceController
         ]);
     }
 
-    public function database()
-    {
-        $database = $this->firebaseService->getDatabase();
-        $reference = $database->getReference('some-reference');
-        $snapshot = $reference->getSnapshot();
-
-        return $this->respond([
-            'status' => 200,
-            'message' => 'Firebase Database',
-            'data' => $snapshot->getValue()
-        ]);
-    }
 
     public function storage()
     {

@@ -12,18 +12,13 @@ class Firebase
     {
         $firebase = (new Factory)
             ->withServiceAccount(APPPATH . 'Config/firebase_credentials.json')
-            ->withDatabaseUri('https://workperks-f6133-default-rtdb.asia-southeast1.firebasedatabase.app/');
+            ->withDatabaseUri('workperks-338ce');
         return $firebase;
     }
 
     public function getAuth(): Auth
     {
         return $this->initialize()->createAuth();
-    }
-
-    public function getDatabase(): Database
-    {
-        return $this->initialize()->createDatabase();
     }
 
     public function getFirestore()

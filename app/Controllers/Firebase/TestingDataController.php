@@ -43,14 +43,14 @@ class TestingDataController extends ResourceController  {
 
     public function addData() {
         $firebase = $this->firebase;
-        $database = $firebase->getDatabase();
+        $firestore = $firebase->getFirestore();
 
         $newData = [
             'name' => "Zeatora",
             'email' => "Zeatora@gmail.com"
         ];
 
-        $database->getReference('users')->push($newData);
+        $firestore->database()->collection('users')->add($newData);
 
         return $this->respond(['status' => 'success', 'message' => 'Data added']);
     }

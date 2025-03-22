@@ -39,14 +39,23 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav m-auto">
-                    <li class="nav-item active"><a href="/home" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="/dashboard" class="nav-link">Dashboard</a></li>
-                    <li class="nav-item"><a href="/dashboardF" class="nav-link">Firebase Testing</a></li>
+                    <li class="nav-item <?= (current_url() == base_url('home')) ? 'active' : '' ?>">
+                        <a href="<?= base_url('home') ?>" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item <?= (current_url() == base_url('contact')) ? 'active' : '' ?>">
+                        <a href="<?= base_url('contact') ?>" class="nav-link">Contact</a>
+                    </li>
+                    <li class="nav-item <?= (current_url() == base_url('dashboard')) ? 'active' : '' ?>">
+                        <a href="<?= base_url('dashboard') ?>" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item <?= (current_url() == base_url('dashboardF')) ? 'active' : '' ?>">
+                        <a href="<?= base_url('dashboardF') ?>" class="nav-link">Firebase Testing</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+
 
     <?= $this->renderSection('content') ?>
 
