@@ -4,25 +4,26 @@ namespace App\Services;
 
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Auth;
-use Kreait\Firebase\Database;
+use Kreait\Firebase\Firestore;
 use Kreait\Firebase\Storage;
 
 class FirebaseService
 {
     protected $firebase;
     protected $auth;
-    protected $database;
+    protected $firestore;
     protected $storage;
 
     public function __construct()
     {
-        $serviceAccountPath = ROOTPATH . 'firebase_credentials.json'; 
+        $serviceAccount = APPPATH . 'Config/firebase_credentials.json';
 
         $this->firebase = (new Factory)
-            ->withServiceAccount($serviceAccountPath);
+            ->withServiceAccount($serviceAccount)
+            ->withDatabaseUri('https://workperks-338ce.firebaseio.com');
 
         $this->auth = $this->firebase->createAuth();
-        $this->database = $this->firebase->createDatabase();
+        $this->firestore = $this->firebase->createFirestore();
         $this->storage = $this->firebase->createStorage();
     }
 
@@ -31,9 +32,9 @@ class FirebaseService
         return $this->auth;
     }
 
-    public function getDatabase(): Database
+    public function getFirestore(): Firestore
     {
-        return $this->database;
+        return $this->firestore;
     }
 
     public function getStorage(): Storage

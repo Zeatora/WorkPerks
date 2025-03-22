@@ -5,23 +5,28 @@ namespace App\Controllers\Firebase;
 use App\Controllers\BaseController;
 use Config\Firebase;
 use CodeIgniter\RESTful\ResourceController;
-use Google\Cloud\Firestore\FirestoreClient;
 
-class TestingDataController extends ResourceController  {
+class TestingDataController extends ResourceController
+{
 
     protected $firebase;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->firebase = new Firebase();
     }
 
-    public function index() {
+    public function index()
+    {
         $firebase = $this->firebase;
         $firestore = $firebase->getFirestore();
 
+        // Correct Firestore reference
         $collectionRef = $firestore->database()->collection('users');
         $documents = $collectionRef->documents();
-        
+
+
+
         $users = [];
         foreach ($documents as $document) {
             if ($document->exists()) {
@@ -37,11 +42,12 @@ class TestingDataController extends ResourceController  {
             'users' => $users,
         ];
 
-        
-       return view('authentication/FirebaseTesting', $data);
+
+        return view('authentication/FirebaseTesting', $data);
     }
 
-    public function addData() {
+    public function addData()
+    {
         $firebase = $this->firebase;
         $firestore = $firebase->getFirestore();
 

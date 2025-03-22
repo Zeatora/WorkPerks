@@ -12,7 +12,7 @@ class Firebase
     {
         $firebase = (new Factory)
             ->withServiceAccount(APPPATH . 'Config/firebase_credentials.json')
-            ->withDatabaseUri('workperks-338ce');
+            ->withDatabaseUri('https://workperks-338ce.firebaseio.com');
         return $firebase;
     }
 
