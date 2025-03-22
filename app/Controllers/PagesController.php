@@ -20,6 +20,14 @@ class PagesController extends BaseController
         return view('pages/login', $data);
     }
 
+    public function signupPage(): string
+    {
+        $data = [
+            'title' => 'Sign Up'
+        ];
+        return view('pages/register', $data);
+    }
+
     public function contact(): string
     {
         $data = [

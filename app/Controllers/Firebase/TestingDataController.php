@@ -3,7 +3,7 @@
 namespace App\Controllers\Firebase;
 
 use App\Controllers\BaseController;
-use Config\Firebase;
+use App\Services\FirebaseService;
 use CodeIgniter\RESTful\ResourceController;
 
 class TestingDataController extends ResourceController
@@ -13,7 +13,7 @@ class TestingDataController extends ResourceController
 
     public function __construct()
     {
-        $this->firebase = new Firebase();
+        $this->firebase = new FirebaseService();
     }
 
     public function index()
@@ -24,8 +24,6 @@ class TestingDataController extends ResourceController
         // Correct Firestore reference
         $collectionRef = $firestore->database()->collection('users');
         $documents = $collectionRef->documents();
-
-
 
         $users = [];
         foreach ($documents as $document) {

@@ -1,11 +1,12 @@
 <?php
-
 namespace App\Services;
 
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Auth;
 use Kreait\Firebase\Firestore;
 use Kreait\Firebase\Storage;
+use Google\Auth\CredentialsLoader;
+use Google\Auth\ApplicationDefaultCredentials;
 
 class FirebaseService
 {
@@ -16,10 +17,10 @@ class FirebaseService
 
     public function __construct()
     {
-        $serviceAccount = APPPATH . 'Config/firebase_credentials.json';
+        $serviceAccountPath = realpath(ROOTPATH . 'writable/firebase_credentials.json');
 
         $this->firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
+            ->withServiceAccount($serviceAccountPath)
             ->withDatabaseUri('https://workperks-338ce.firebaseio.com');
 
         $this->auth = $this->firebase->createAuth();

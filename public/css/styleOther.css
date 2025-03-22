@@ -3,6 +3,8 @@
   z-index: 3;
   padding: 0;
 }
+
+
 @media (max-width: 991.98px) {
   .ftco-navbar-light {
     background: #000 !important;
@@ -156,33 +158,3 @@
   color: #000;
 }
 
-.social-media {
-  display: inline-block;
-}
-@media (max-width: 991.98px) {
-  .social-media {
-    margin: 0 auto;
-  }
-}
-@media (max-width: 767.98px) {
-  .social-media {
-    margin-bottom: 20px;
-  }
-}
-.social-media p a {
-  border: 1px solid #e6e6e6;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 4px;
-}
-.social-media p a span {
-  color: #4d4d4d;
-}
-.social-media p a:hover {
-  background: #ff0000;
-  border-color: #ff0000;
-}
-.social-media p a:hover span {
-  color: #fff;
-}
