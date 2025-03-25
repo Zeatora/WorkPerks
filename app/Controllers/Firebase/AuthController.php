@@ -48,16 +48,17 @@ class AuthController extends BaseController
         try {
             $user = $auth->createUserWithEmailAndPassword($email, $password);
             $newUser = $users->document($user->uid)->set($newData);
-            
+
             // Set flashdata for success message
-            
+
             return redirect()->to('/login')->with('status', 'success')->with('message', 'Account created successfully');
         } catch (\Exception $e) {
             return redirect()->to('/register')->withInput()->with('status', 'errors')->with('message', $e->getMessage(), 400);
         }
     }
 
-    public function loginUser() {
+    public function loginUser()
+    {
         $firebase = $this->firebase;
         $auth = $firebase->getAuth();
         $firestore = $firebase->getFirestore();
@@ -69,25 +70,32 @@ class AuthController extends BaseController
             $user = $auth->signInWithEmailAndPassword($email, $password);
             $users = $firestore->database()->collection('users');
             $userDoc = $users->document($user->firebaseUserId())->snapshot();
-        
+
             if (!$userDoc->exists()) {
                 return redirect()->to('/login')->with('status', 'error')->with('message', 'User data not found in Firestore');
             }
-        
+
             $Data = array(
                 'Data' => $userDoc->data(),
                 'login' => true
             );
-        
+
             session()->set('DataUser', $Data);
-        
+
             return redirect()->to('/home')->with('status', 'success')->with('message', 'Login successfully');
+        }
+       
+        catch (\Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
+            return redirect()->to('/login')->with('status', 'error')->with('message', 'Invalid password. Please try again.');
+        } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+            return redirect()->to('/login')->with('status', 'error')->with('message', 'User not found. Please check your email.');
         } catch (\Exception $e) {
-            return redirect()->to('/register')->withInput()->with('status', 'errors')->with('message', $e->getMessage(), 400);
+            return redirect()->to('/login')->with('status', 'error')->with('message', $e->getMessage());
         }
     }
 
-    public function logoutUser() {
+    public function logoutUser()
+    {
         $firebase = $this->firebase;
         $auth = $firebase->getAuth();
 

@@ -40,6 +40,16 @@ class TestingDataController extends ResourceController
             'users' => $users,
         ];
 
+        $session = session();
+        $isLoggedIn = $session->get('DataUser.login');
+
+        if (!$isLoggedIn) {
+            $data = [
+                'title' => "Login",
+            ];
+            return redirect()->to('/login')->with('status', 'warning')->with('message', 'You are not logged in');
+        }
+
 
         return view('authentication/FirebaseTesting', $data);
     }

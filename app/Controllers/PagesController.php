@@ -9,14 +9,27 @@ class PagesController extends BaseController
         $data = [
             'title' => 'Home'
         ];
+
+
         return view('pages/home', $data);
     }
 
-    public function loginPage(): string
+    public function loginPage()
     {
         $data = [
             'title' => 'Login'
         ];
+
+        $session = session();
+        $isLoggedIn = $session->get('DataUser.login');
+
+        if ($isLoggedIn) {
+            $data = [
+                'title' => 'Home'
+            ];
+            return redirect()->to('/home')->with('status', 'warning')->with('message', 'You are already logged in')->with('data', $data);
+        }
+
         return view('pages/login', $data);
     }
 
