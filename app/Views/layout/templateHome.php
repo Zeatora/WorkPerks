@@ -83,10 +83,10 @@
                     <div class="navbar-links">
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item <?= (current_url() == base_url('login')) ? 'active' : '' ?>">
-                                <a href="<?= base_url('/login') ?>" class="nav-link"><span class="fa fa-sign-in-alt"></span> Log In</a>
+                                <a href="<?= base_url('/login') ?>" class="nav-link"><span class="fa fa-sign-in-alt"></span> Masuk</a>
                             </li>
                             <li class="nav-item <?= (current_url() == base_url('register')) ? 'active' : '' ?>">
-                                <a href="<?= base_url('/register') ?>" class="nav-link"><span class="fa fa-user-plus"></span> Sign Up</a>
+                                <a href="<?= base_url('/register') ?>" class="nav-link"><span class="fa fa-user-plus"></span> Buat Akun</a>
                             </li>
                         </ul>
                     </div>
