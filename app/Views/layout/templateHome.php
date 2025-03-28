@@ -86,7 +86,7 @@
                                 <a href="<?= base_url('/login') ?>" class="nav-link"><span class="fa fa-sign-in-alt"></span> Masuk</a>
                             </li>
                             <li class="nav-item <?= (current_url() == base_url('register')) ? 'active' : '' ?>">
-                                <a href="<?= base_url('/register') ?>" class="nav-link"><span class="fa fa-user-plus"></span> Buat Akun</a>
+                                <a href="<?= base_url('/register') ?>" class="nav-link"><span class="fa fa-user-plus"></span> Buat Akuns</a>
                             </li>
                         </ul>
                     </div>
