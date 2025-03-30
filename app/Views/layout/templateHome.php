@@ -48,12 +48,45 @@
                 <div class="navbar-links">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item <?= (current_url() == base_url('home')) ? 'active' : '' ?>">
-                            <a href="<?= base_url('home') ?>" class="nav-link">Home</a>
+                            <a href="<?= base_url('home') ?>" class="nav-link">Beranda</a>
                         </li>
                         <li class="nav-item <?= (current_url() == base_url('contact')) ? 'active' : '' ?>">
-                            <a href="<?= base_url('contact') ?>" class="nav-link">Contact</a>
+                            <a href="<?= base_url('contact') ?>" class="nav-link">Kontak</a>
                         </li>
+
                         <?php if ($isLoggedIn): ?>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="dropdown04"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">Admin</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <a class="dropdown-item" href="#">Dashboard Admin</a>
+                                    <a class="dropdown-item" href="#">Kelola Karyawan</a>
+                                    <a class="dropdown-item" href="#">Kelola Tunjangan</a>
+                                    <a class="dropdown-item" href="#">Pengelolaan Gaji & Insentif</a>
+                                    <a class="dropdown-item" href="#">Laporan & Analitik</a>
+                                    <a class="dropdown-item" href="#">Pengaturan Perusahaan</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="dropdown04"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">Karyawan</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <a class="dropdown-item" href="#">Dashboard Karyawan</a>
+                                    <a class="dropdown-item" href="#">Detail Karyawan</a>
+                                    <a class="dropdown-item" href="#">Riwayat Pembayaran & Insentif</a>
+                                    <a class="dropdown-item" href="#">Pengajuan Klaim & Reimburse</a>
+                                </div>
+                            </li>
                             <li class="nav-item <?= (current_url() == base_url('dashboard')) ? 'active' : '' ?>">
                                 <a href="<?= base_url('dashboard') ?>" class="nav-link">Dashboard</a>
                             </li>
@@ -74,6 +107,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-custom" aria-labelledby="userDropdown">
                                     <li><a class="dropdown-item" href="<?= base_url('/profile') ?>"><span class="fa fa-user"></span> Profile</a></li>
+                                    <li><a class="dropdown-item" href="<?= base_url('#') ?>"><span class="fa fa-question"></span> FAQ & Panduan</a></li>
                                     <li><a class="dropdown-item" href="<?= base_url('/function/logout/logoutAccount') ?>"><span class="fa fa-sign-out-alt"></span> Log Out</a></li>
                                 </ul>
                             </li>
