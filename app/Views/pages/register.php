@@ -7,7 +7,7 @@
             <h2>Sign Up</h2>
             <form action="/function/register/createAccount" method="post">
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
+                    <label for="email" class="form-label">Email addresss</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="mb-3">
@@ -36,7 +36,7 @@
                         </span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Create Account</button>
+                <button type="submit" class="btn btn-primary">Buat Akun</button>
             </form>
         </div>
     </div>
