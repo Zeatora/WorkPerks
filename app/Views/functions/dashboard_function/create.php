@@ -7,7 +7,7 @@
         <div class="col pt-5">
             <div class="mb-3">
                 <form action="/pages/dashboard/create/createFunction" method="post">
-                    <label for="name" class="form-label">Usernames</label>
+                    <label for="name" class="form-label">Usernameee</label>
                     <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username!" required>
                     <label for="email" class="form-label">Email Address</label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email!" required>
