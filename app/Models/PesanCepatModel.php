@@ -4,23 +4,19 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class usersModel extends Model
+class PesanCepatModel extends Model
 {
-    protected $table      = 'users';
+    protected $table      = 'pesan_cepat';
     protected $primaryKey = 'id';
 
     protected $allowedFields = [
-        'username',
-        'password',
-        'nama_lengkap',
+        'user_id',
+        'nama',
         'email',
-        'role',
-        'departemen',
+        'pesan',
         'created_at',
-        'updated_at',
-        'status'
+        'updated_at'
     ];
 
     protected $useTimestamps = true;
 }
-

@@ -11,13 +11,14 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="<?= base_url('css/styleOther.css') ?>">
     <script src="https://kit.fontawesome.com/75c1df6294.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
 <body>
     <?php
     $session = session();
     $isLoggedIn = $session->get('DataUser.login') ?? false;
-
+    $role = $session->get('DataUser.role') ?? 'guest';
     ?>
 
     <div class="container-fluid px-md-5 mt-3">
@@ -55,6 +56,7 @@
                         </li>
 
                         <?php if ($isLoggedIn): ?>
+                            <?php if ($role === 'admin'): ?>
                             <li class="nav-item dropdown">
                                 <a
                                     class="nav-link dropdown-toggle"
@@ -65,13 +67,15 @@
                                     aria-expanded="false">Admin</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                                     <a class="dropdown-item" href="<?php echo base_url('PagesController/dashboard_admin') ?>">Dashboard Admin</a>
-                                    <a class="dropdown-item" href="#">Kelola Karyawan</a>
-                                    <a class="dropdown-item" href="#">Kelola Tunjangan</a>
-                                    <a class="dropdown-item" href="#">Pengelolaan Gaji & Insentif</a>
+                                    <a class="dropdown-item" href="<?php echo base_url('PagesController/kelola_karyawan') ?>">Kelola Karyawan</a>
+                                    <a class="dropdown-item" href="<?php echo base_url('PagesController/kelola_tunjangan') ?>">Kelola Tunjangan</a>
+                                    <a class="dropdown-item" href="<?php echo base_url('PagesController/pengelolaan_gaji') ?>">Kelola Gaji</a>
                                     <a class="dropdown-item" href="#">Laporan & Analitik</a>
-                                    <a class="dropdown-item" href="#">Pengaturan Perusahaan</a>
+                                    <a class="dropdown-item" href="<?php echo base_url('PagesController/pengaturan_perusahaan') ?>">Pengaturan Perusahaan</a>
+                                    <a class="dropdown-item" href="<?php echo base_url('PagesController/lihat_inbox_pesan') ?>">Lihat Inbox Pesan</a>
                                 </div>
                             </li>
+                            <?php endif; ?>
                             <li class="nav-item dropdown">
                                 <a
                                     class="nav-link dropdown-toggle"
@@ -125,7 +129,7 @@
 
     <?php if (session('status') === 'error'): ?>
         <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
-            <ul>
+            <ul style="list-style-type: none; padding: 0; margin: 0;">
                 <?php $message = session('message');
                 if (is_array($message)) : ?>
                     <?php foreach ($message as $error): ?>
