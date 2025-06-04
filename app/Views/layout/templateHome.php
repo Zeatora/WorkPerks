@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
     <script src="https://kit.fontawesome.com/75c1df6294.js" crossorigin="anonymous"></script>
 </head>
 
@@ -87,12 +87,6 @@
                                     <a class="dropdown-item" href="#">Pengajuan Klaim & Reimburse</a>
                                 </div>
                             </li>
-                            <li class="nav-item <?= (current_url() == base_url('dashboard')) ? 'active' : '' ?>">
-                                <a href="<?= base_url('dashboard') ?>" class="nav-link">Dashboard</a>
-                            </li>
-                            <li class="nav-item <?= (current_url() == base_url('dashboardF')) ? 'active' : '' ?>">
-                                <a href="<?= base_url('dashboardF') ?>" class="nav-link">Firebase Testing</a>
-                            </li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -103,12 +97,12 @@
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="fa fa-user-circle"></span> <?= $session->get('DataUser.Data.username') ?? 'User' ?>
+                                    <span class="fa fa-user-circle"></span> <?= $session->get('DataUser.username') ?? 'User' ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-custom" aria-labelledby="userDropdown">
                                     <li><a class="dropdown-item" href="<?= base_url('/profile') ?>"><span class="fa fa-user"></span> Profile</a></li>
                                     <li><a class="dropdown-item" href="<?= base_url('#') ?>"><span class="fa fa-question"></span> FAQ & Panduan</a></li>
-                                    <li><a class="dropdown-item" href="<?= base_url('/function/logout/logoutAccount') ?>"><span class="fa fa-sign-out-alt"></span> Log Out</a></li>
+                                    <li><a class="dropdown-item" href="<?= base_url('/AuthController/logout') ?>"><span class="fa fa-sign-out-alt"></span> Log Out</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -119,8 +113,8 @@
                             <li class="nav-item <?= (current_url() == base_url('login')) ? 'active' : '' ?>">
                                 <a href="<?= base_url('/login') ?>" class="nav-link"><span class="fa fa-sign-in-alt"></span> Masuk</a>
                             </li>
-                            <li class="nav-item <?= (current_url() == base_url('register')) ? 'active' : '' ?>">
-                                <a href="<?= base_url('/register') ?>" class="nav-link"><span class="fa fa-user-plus"></span> Buat Akuns</a>
+                            <li class="nav-item <?= (current_url() == base_url('AuthController/registerUser')) ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('AuthController/registerUser') ?>" class="nav-link"><span class="fa fa-user-plus"></span> Buat Akun</a>
                             </li>
                         </ul>
                     </div>
@@ -147,9 +141,39 @@
         </div>
     <?php endif; ?>
 
+    <?php if (session()->getFlashdata('error')) : ?>
+        <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
+            <?php if (is_array(session()->getFlashdata('error'))) : ?>
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                    <?php foreach (session()->getFlashdata('error') as $error) : ?>
+                        <li><?= esc($error) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else : ?>
+                <p><?= esc(session()->getFlashdata('error')) ?></p> 
+            <?php endif; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php elseif (session()->getFlashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
+            <?= session()->getFlashdata('success') ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php elseif (session()->getFlashdata('warning')) : ?>
+        <div class="alert alert-warning alert-dismissible fade show custom-alert" role="alert">
+            <?= session()->getFlashdata('warning') ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+
     <?= $this->renderSection('content') ?>
 
-    <!-- Include Required Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
