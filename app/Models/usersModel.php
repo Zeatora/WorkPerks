@@ -10,6 +10,7 @@ class usersModel extends Model
     protected $primaryKey = 'id';
 
     protected $allowedFields = [
+        'departemen_id',
         'username',
         'password',
         'nama_lengkap',
@@ -18,7 +19,10 @@ class usersModel extends Model
         'departemen',
         'created_at',
         'updated_at',
-        'status'
+        'login_terakhir',
+        'status',
+        'url_profile'
+
     ];
 
     protected $useTimestamps = true;

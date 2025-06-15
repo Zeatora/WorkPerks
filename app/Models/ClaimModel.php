@@ -15,6 +15,7 @@ class ClaimModel extends Model
         'jumlah',
         'deskripsi',
         'status',
+        'bukti_url',
         'submitted_at',
         'approved_at'
     ];

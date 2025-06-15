@@ -36,11 +36,9 @@ class AuthController extends BaseController
                 'nama_lengkap' => $this->request->getPost('nama_lengkap'),
                 'email' => $this->request->getPost('email'),
                 'role' => $this->request->getPost('role'),
-                'departemen' => $this->request->getPost('departemen'),
             ];
 
             $data['role'] = 'karyawan'; 
-            $data['departemen'] = 'Informatika'; 
 
             if ($this->userModel->insert($data)) {
                 return redirect()->to('/login')->with('success', 'Registrasi berhasil, silakan login.');
@@ -68,6 +66,7 @@ class AuthController extends BaseController
 
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
+            $loginTrakhir = date('Y-m-d H:i:s');
 
             $user = $this->userModel->where('email', $email)->first();
 
@@ -79,10 +78,13 @@ class AuthController extends BaseController
                         'nama_lengkap' => $user['nama_lengkap'],
                         'email' => $user['email'],
                         'role' => $user['role'],
-                        'departemen' => $user['departemen'],
+                        'departemen_id' => $user['departemen_id'] ?? null,
+                        'status' => $user['status'],
+                        'login_terakhir' => $user['login_terakhir'] ?? null,
                         'login' => true,
                     ]
                 ];
+                $this->userModel->update($user['id'], ['login_terakhir' => $loginTrakhir]);
                 session()->set($sessionData);
                 return redirect()->to('/home')->with('success', 'Login berhasil.');
             } else {

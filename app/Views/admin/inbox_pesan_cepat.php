@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <div class="container mt-4">
-    <h2 class="mb-4">Inbox Pesan</h2>
+    <h2 class="mb-4">INBOX PESAN</h2>
 
     <?php if (session()->getFlashdata('success')): ?>
         <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
@@ -23,7 +23,8 @@
                 </thead>
                 <tbody>
                     <?php if (!empty($pesanCepat)) : ?>
-                        <?php $no = 1; foreach ($pesanCepat as $pesan): ?>
+                        <?php $no = 1 + ($pager->getCurrentPage('default') - 1) * $pager->getPerPage('default'); ?>
+                        <?php foreach ($pesanCepat as $pesan): ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= esc($pesan['nama']) ?></td>
@@ -39,6 +40,7 @@
                     <?php endif; ?>
                 </tbody>
             </table>
+            <?= $pager->links('default', 'bootstrap') ?>
         </div>
     </div>
 </div>

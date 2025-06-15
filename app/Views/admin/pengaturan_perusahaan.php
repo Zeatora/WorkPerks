@@ -5,13 +5,8 @@
 <div class="container mt-4">
     <h2 class="mb-4">Pengaturan Perusahaan</h2>
 
-    <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
-    <?php endif; ?>
-
-    <form action="<?= base_url('pengaturan/update') ?>" method="post">
+    <form action="<?= base_url('PagesController/update_aturan_perusahaan') ?>" method="post">
         <?= csrf_field() ?>
-
         <?php foreach ($pengaturan as $item): ?>
             <div class="mb-3">
                 <label for="<?= $item['setting_key'] ?>" class="form-label"><strong><?= ucwords(str_replace('_', ' ', $item['setting_key'])) ?></strong></label>

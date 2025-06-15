@@ -16,10 +16,26 @@
             </div>
         </div>
         <div class="col-md-3">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Departemen</h5>
+                    <p class="card-text display-6"><?php echo $TotalDepartemen ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
             <div class="card text-white bg-success mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Gaji Bulan Ini</h5>
-                    <p class="card-text display-6"><?php echo $TotalGaji ?></p>
+                    <?php echo 'Rp' . number_format($TotalGaji, 0, ',', '.') ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Tunjangan Bulan Ini</h5>
+                    <?php echo 'Rp' . number_format($TotalTunjangan, 0, ',', '.') ?>
                 </div>
             </div>
         </div>
@@ -27,7 +43,7 @@
             <div class="card text-white bg-info mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Tunjangan Aktif</h5>
-                    <p class="card-text display-6"><?php echo $TunjanganAktif ?></p>
+                    <p class="card-text display-6"><?php echo $TunjanganAktif ?> Tipe</p>
                 </div>
             </div>
         </div>
@@ -41,7 +57,6 @@
         </div>
     </div>
 
-    <!-- Charts Section -->
     <div class="row mt-4">
         <div class="col-md-8">
             <div class="card">
@@ -61,7 +76,6 @@
         </div>
     </div>
 
-    <!-- Recent Claims Table -->
     <div class="row mt-4">
         <div class="col">
             <div class="card">
@@ -85,9 +99,16 @@
                                     <td><?php echo number_format($claim['jumlah'], 0, ',', '.'); ?></td>
                                     <td><?php echo ucfirst($claim['status']); ?></td>
                                     <td>
-                                        <a href="<?php echo base_url('claims/view/' . $claim['id']); ?>" class="btn btn-info btn-sm">Lihat</a>
+                                        <a href="<?= base_url('ClaimsController/lihat_bukti/' . $claim['id']) ?>" target="_blank" class="btn btn-sm btn-outline-secondary">Lihat Bukti</a>
                                         <?php if ($claim['status'] == 'pending'): ?>
-                                            <a href="<?php echo base_url('claims/approve/' . $claim['id']); ?>" class="btn btn-success btn-sm">Setujui</a>
+                                            <a href="<?php echo base_url('ClaimsController/reject_klaim/' . $claim['id']); ?>" class="btn btn-danger btn-sm">Tolak</a>
+                                            <a href="#"
+                                                class="btn btn-success btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#approveModal<?= $claim['id'] ?>">
+                                                Setujui
+                                            </a>
+
                                         <?php endif; ?>
                                     </td>
                                 </tr>
@@ -99,6 +120,39 @@
                             <?php endif; ?>
                         </tbody>
                     </table>
+                    <?= $pager->links('default', 'bootstrap') ?>
+                    <?php foreach ($ListPendingClaims as $claim): ?>
+                        <div class="modal fade" id="approveModal<?= $claim['id'] ?>" tabindex="-1">
+                            <div class="modal-dialog">
+                                <form action="<?= base_url('ClaimsController/approve_klaim/' . $claim['id']) ?>" method="post">
+                                    <?= csrf_field() ?>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Setujui Klaim - <?= esc($claim['nama_karyawan']) ?></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><strong>Jenis:</strong> <?= esc($claim['tipe_klaim']) ?></p>
+                                            <p><strong>Jumlah:</strong> Rp<?= number_format($claim['jumlah'], 0, ',', '.') ?></p>
+
+                                            <div class="mb-3">
+                                                <label for="start_date" class="form-label">Tanggal Mulai Tunjangan</label>
+                                                <input type="date" name="start_date" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="end_date" class="form-label">Tanggal Berakhir (opsional)</label>
+                                                <input type="date" name="end_date" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">Setujui & Aktifkan</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -112,14 +166,25 @@
         type: 'line',
         data: {
             labels: <?= $chart_bulan ?>,
-            datasets: [{
+            datasets: [
+
+            {
                 label: 'Total Gaji',
                 data: <?= $chart_gaji ?>,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 2,
                 fill: true
-            }]
+            }
+            , {
+                label: 'Total Tunjangan',
+                data: <?= $chart_tunjangan ?>,
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 2,
+                fill: true
+            }
+        ]
         }
     });
 
@@ -131,7 +196,7 @@
             datasets: [{
                 label: 'Distribusi Tunjangan',
                 data: <?= $chart_total ?>,
-                backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545']
+                backgroundColor: ['#28a745', '#007bff', '#ffc107', '#dc3545']
             }]
         }
     });

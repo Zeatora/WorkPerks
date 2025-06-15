@@ -5,6 +5,7 @@
 $session = session();
 $isLoggedIn = $session->get('DataUser.login') ?? false;
 $nama_lengkap = $session->get('DataUser.nama_lengkap') ?? 'User';
+$email = $session->get('DataUser.email');
 ?>
 <div class="container py-5">
     <div class="row justify-content-between align-items-center">
@@ -41,11 +42,11 @@ $nama_lengkap = $session->get('DataUser.nama_lengkap') ?? 'User';
                     <form action="<?php echo base_url('PagesController/post_pesan_cepat'); ?>" method="post">
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Anda" required>
+                            <input readonly type="text" class="form-control" id="nama" name="nama" value="<?php echo $nama_lengkap ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="email@domain.com" required>
+                            <input readonly type="email" class="form-control" id="email" name="email" value="<?php echo $email ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="pesan" class="form-label">Pesan</label>

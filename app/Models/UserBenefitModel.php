@@ -12,6 +12,7 @@ class UserBenefitModel extends Model
     protected $allowedFields = [
         'user_id',
         'benefit_id',
+        'jumlah',
         'tanggal_mulai',
         'tanggal_berakhir',
         'status'
